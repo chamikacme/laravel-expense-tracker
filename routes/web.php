@@ -28,7 +28,6 @@ Route::post('/expenses', [ExpenseController::class, 'store']);
 // show edit form
 Route::get('/expenses/{expense}/edit', [ExpenseController::class, 'edit']);
 
-
 // update listing
 Route::put('expenses/{expense}', [ExpenseController::class, 'update']);
 

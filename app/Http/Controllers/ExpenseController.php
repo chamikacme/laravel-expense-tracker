@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Expense;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
 
 class ExpenseController extends Controller
 {
@@ -33,10 +34,12 @@ class ExpenseController extends Controller
     public function store(Request $request)
     {
         $formData = $request->validate([
-            'desc' => 'required',
+            'name' => 'required',
             'amount' => 'required|numeric'
         ]);
 
+        $formData['description'] = $request->input('description');
+        $formData['type'] = $request->input('type');
         $formData['created_at'] = now();
         $formData['updated_at'] = now();
 
@@ -48,6 +51,7 @@ class ExpenseController extends Controller
     // Show edit form
     public function edit(Expense $expense)
     {
+        Redirect::setIntendedUrl(url()->previous());
         return view('expenses.edit', ['expense' => $expense]);
     }
 
@@ -55,15 +59,19 @@ class ExpenseController extends Controller
     public function update(Request $request, Expense $expense)
     {
         $formData = $request->validate([
-            'desc' => 'required',
+            'name' => 'required',
             'amount' => 'required|numeric'
         ]);
+
+        $formData['description'] = $request->input('description');
+
+        $formData['type'] = $request->input('type');
 
         $formData['updated_at'] = now();
 
         $expense->update($formData);
 
-        return redirect("/expenses/" . $expense['id'] . "");
+        return redirect()->intended();
     }
 
     // Delete listing
