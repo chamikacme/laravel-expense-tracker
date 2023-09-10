@@ -12,7 +12,7 @@
                             Edit
                         </a>
                         <button type="button" class="btn btn-danger card-link mx-1" data-bs-toggle="modal"
-                            data-bs-target="#deleteModal" style="width: 75px;">
+                            data-bs-target="#deleteModal{{ $expense['id'] }}" style="width: 75px;">
                             Delete
                         </button>
                         <x-delete-modal :expense="$expense" />

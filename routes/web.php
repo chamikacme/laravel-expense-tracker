@@ -1,9 +1,10 @@
 <?php
 
-use App\Http\Controllers\ExpenseController;
+use App\Models\Expense;
 use Illuminate\Support\Facades\Route;
 
-use App\Models\Expense;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\ExpenseController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,40 +18,42 @@ use App\Models\Expense;
 */
 
 // all expenses
-Route::get('/', [ExpenseController::class, 'index']);
+Route::get('/', [UserController::class, 'home']);
+
+// all expenses
+Route::get('/expenses', [ExpenseController::class, 'index'])->middleware('auth');
 
 // show add form
-Route::get('/expenses/create', [ExpenseController::class, 'create']);
+Route::get('/expenses/create', [ExpenseController::class, 'create'])->middleware('auth');
 
 // single expense
-Route::post('/expenses', [ExpenseController::class, 'store']);
+Route::post('/expenses', [ExpenseController::class, 'store'])->middleware('auth');
 
 // show edit form
-Route::get('/expenses/{expense}/edit', [ExpenseController::class, 'edit']);
+Route::get('/expenses/{expense}/edit', [ExpenseController::class, 'edit'])->middleware('auth');
 
 // update listing
-Route::put('expenses/{expense}', [ExpenseController::class, 'update']);
+Route::put('expenses/{expense}', [ExpenseController::class, 'update'])->middleware('auth');
 
 // delete listing
-Route::delete('expenses/{expense}', [ExpenseController::class, 'destroy']);
+Route::delete('expenses/{expense}', [ExpenseController::class, 'destroy'])->middleware('auth');
 
 // single expense
-Route::get('/expenses/{expense}', [ExpenseController::class, 'show']);
+Route::get('/expenses/{expense}', [ExpenseController::class, 'show'])->middleware('auth');
 
 
 
+// show register form
+Route::get('/register', [UserController::class, 'create'])->middleware('guest');
 
+// create a new user
+Route::post('/users', [UserController::class, 'store'])->middleware('guest');
 
+// logout user
+Route::get('/logout', [UserController::class, 'logout'])->middleware('auth');
 
+// show login form
+Route::get('/login', [UserController::class, 'login'])->name('login')->middleware('guest');
 
-
-
-
-
-// Route::get('/hello', function () {
-//     return response("<h1>Hello World</h1>", 200);
-// });
-
-// Route::get('/projects/{id}', function ($id) {
-//     return response('post ' . $id);
-// });
+// login user
+Route::post('/users/authenticate', [UserController::class, 'authenticate'])->middleware('guest');

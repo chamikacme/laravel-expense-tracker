@@ -12,7 +12,7 @@
 
 <body>
     <div>
-        @include('partials._navbar')
+        <x-navbar />
     </div>
     <main class="px-5 py-2">
         @yield('content')

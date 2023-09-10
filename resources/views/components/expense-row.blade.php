@@ -9,20 +9,20 @@
     <td>
         <div class="row">
             <div class="col-auto">
-                <a href="/expenses/{{ $expense['id'] }}" class="btn btn-outline-primary card-link mx-1 btn-sm"
+                <a href="/expenses/{{ $expense['id'] }}" class="btn btn-outline-primary card-link m-1 btn-sm"
                     style="width: 75px;">
                     View
                 </a>
             </div>
             <div class="col-auto">
-                <a href="/expenses/{{ $expense['id'] }}/edit"class="btn btn-warning card-link mx-1 btn-sm"
+                <a href="/expenses/{{ $expense['id'] }}/edit"class="btn btn-warning card-link m-1 btn-sm"
                     style="width: 75px;">
                     Edit
                 </a>
             </div>
             <div class="col-auto">
 
-                <button type="button" class="btn btn-danger card-link mx-1 btn-sm" data-bs-toggle="modal"
+                <button type="button" class="btn btn-danger card-link m-1 btn-sm" data-bs-toggle="modal"
                     data-bs-target="#deleteModal{{ $expense['id'] }}" style="width: 75px;">
                     Delete
                 </button>

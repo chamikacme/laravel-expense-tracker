@@ -8,17 +8,21 @@ use Illuminate\Support\Facades\Redirect;
 
 class ExpenseController extends Controller
 {
+
     //Show all expenses
     public function index()
     {
         return view('expenses.index', [
-            'expenses' => Expense::all()
+            'expenses' => auth()->user()->expenses
         ]);
     }
 
     //Show single expenses
     public function show(Expense $expense)
     {
+        if ($expense->user_id !== auth()->user()->id) {
+            return redirect('/expenses');
+        }
         return view('expenses.show', [
             'expense' => $expense
         ]);
@@ -42,15 +46,20 @@ class ExpenseController extends Controller
         $formData['type'] = $request->input('type');
         $formData['created_at'] = now();
         $formData['updated_at'] = now();
+        $formData['user_id'] = auth()->user()->id;
 
         Expense::create($formData);
 
-        return redirect('/');
+        return redirect('/expenses');
     }
 
     // Show edit form
     public function edit(Expense $expense)
     {
+        if ($expense->user_id !== auth()->user()->id) {
+            return redirect('/expenses');
+        }
+
         Redirect::setIntendedUrl(url()->previous());
         return view('expenses.edit', ['expense' => $expense]);
     }
@@ -77,7 +86,11 @@ class ExpenseController extends Controller
     // Delete listing
     public function destroy(Expense $expense)
     {
+        if ($expense->user_id !== auth()->user()->id) {
+            return redirect('/expenses');
+        }
+
         $expense->delete();
-        return redirect('/');
+        return redirect('/expenses');
     }
 }

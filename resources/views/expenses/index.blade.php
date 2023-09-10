@@ -28,7 +28,11 @@
                                 <x-expense-row :expense="$expense" />
                             @endforeach
                         @else
-                            <p>No expenses found</p>
+                            <tr>
+                                <td colspan="6" class="text-center">
+                                    <p class="laravel-text my-2">No expenses found</p>
+                                </td>
+                            </tr>
                         @endunless
 
                     </tbody>
