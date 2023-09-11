@@ -2,8 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\ExpenseType;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Expense extends Model
 {
@@ -15,5 +16,11 @@ class Expense extends Model
     public function user()
     {
         return $this->belongsTo(User::class, 'user_id');
+    }
+
+    //Relationship to ExpenseType
+    public function expense_type()
+    {
+        return $this->belongsTo(ExpenseType::class, 'expense_type_id');
     }
 }

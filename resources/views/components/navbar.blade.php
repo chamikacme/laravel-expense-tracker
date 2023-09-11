@@ -13,6 +13,8 @@
                 </li>
                 @auth
                     <li class="nav-item ms-3">
+                        <a class="nav-link" href="/expenses/types">Expense Types</a>
+                    <li class="nav-item ms-3">
                         <a class="nav-link" href="/expenses">Expenses</a>
                     </li>
                     <li class="nav-item dropdown">
@@ -20,7 +22,7 @@
                             Profile
                         </button>
                         <ul class="dropdown-menu dropdown-menu-end">
-                            <li><a class="dropdown-item" href="#">Profile</a></li>
+                            <li><a class="dropdown-item" href="/profile">Profile</a></li>
                             <li>
                                 <a class="dropdown-item"type="submit" href="/logout">Logout</a>
                             </li>

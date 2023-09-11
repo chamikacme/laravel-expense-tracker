@@ -2,7 +2,7 @@
 
 <tr>
     <td>{{ $expense['name'] }}</td>
-    <td>{{ $expense['type'] }}</td>
+    <td>{{ $expense['expense_type']['type'] }}</td>
     <td>{{ $expense['description'] }}</td>
     <td>Rs.{{ $expense['amount'] }}/-</td>
     <td>{{ $expense['created_at']->toDateString() }}</td>

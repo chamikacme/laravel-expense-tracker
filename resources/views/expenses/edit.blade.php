@@ -42,20 +42,20 @@
                             </p>
                         @enderror
                     </div>
+
                     <div class="mb-3">
                         <label for="type" class="form-label">Expense Type</label>
-                        <select class="form-control form-select" type="text" id="type" name="type"
+                        <select class="form-control form-select" type="text" id="type" name="expense_type_id"
                             value="{{ old('type') }}" aria-placeholder="Expense Type">
-                            <option value="Uncategorized" {{ $expense['type'] == 'Uncategorized' ? 'selected' : '' }}>Choose
-                                an option</option>
-                            <option value="Food" {{ $expense['type'] == 'Food' ? 'selected' : '' }}>Food</option>
-                            <option value="Transport" {{ $expense['type'] == 'Transport' ? 'selected' : '' }}>Transport
-                            </option>
-                            <option value="Groceries" {{ $expense['type'] == 'Groceries' ? 'selected' : '' }}>Groceries
-                            </option>
-                            <option value="Entertainment" {{ $expense['type'] == 'Entertainment' ? 'selected' : '' }}>
-                                Entertainment</option>
-                            <option value="Other" {{ $expense['type'] == 'Other' ? 'selected' : '' }}>Other</option>
+                            @unless (count($expense_types) === 0)
+                                @foreach ($expense_types as $expense_type)
+                                    <option value={{ $expense_type->id }}
+                                        {{ $expense['expense_type_id'] == $expense_type->id ? 'selected' : '' }}>
+                                        {{ $expense_type->type }}</option>
+                                @endforeach
+                            @else
+                                <option value="Uncategorized">No Categories</option>
+                            @endunless
                         </select>
                         @error('type')
                             <p class="text-danger">

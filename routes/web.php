@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ExpenseController;
+use App\Http\Controllers\ExpenseTypeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,8 +18,21 @@ use App\Http\Controllers\ExpenseController;
 |
 */
 
-// all expenses
 Route::get('/', [UserController::class, 'home']);
+
+
+// get user expense types
+Route::get('/expenses/types', [ExpenseTypeController::class, 'index'])->middleware('auth');
+
+// add expense type
+Route::post('/expenses/types', [ExpenseTypeController::class, 'store'])->middleware('auth');
+
+// edit expense type
+Route::put('/expenses/types/{expenseType}/edit', [ExpenseTypeController::class, 'update'])->middleware('auth');
+
+// delete expense type
+Route::delete('/expenses/types/{expenseType}', [ExpenseTypeController::class, 'destroy'])->middleware('auth');
+
 
 // all expenses
 Route::get('/expenses', [ExpenseController::class, 'index'])->middleware('auth');
@@ -57,3 +71,6 @@ Route::get('/login', [UserController::class, 'login'])->name('login')->middlewar
 
 // login user
 Route::post('/users/authenticate', [UserController::class, 'authenticate'])->middleware('guest');
+
+// show user profile
+Route::get('/profile', [UserController::class, 'show'])->middleware('auth');

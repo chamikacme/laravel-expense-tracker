@@ -31,7 +31,9 @@ class ExpenseController extends Controller
     // Show add form
     public function create()
     {
-        return view('expenses.create');
+        return view('expenses.create', [
+            'expense_types' => auth()->user()->expenseTypes
+        ]);
     }
 
     // Store expense data
@@ -43,7 +45,7 @@ class ExpenseController extends Controller
         ]);
 
         $formData['description'] = $request->input('description');
-        $formData['type'] = $request->input('type');
+        $formData['expense_type_id'] = $request->input('expense_type_id');
         $formData['created_at'] = now();
         $formData['updated_at'] = now();
         $formData['user_id'] = auth()->user()->id;
@@ -61,7 +63,7 @@ class ExpenseController extends Controller
         }
 
         Redirect::setIntendedUrl(url()->previous());
-        return view('expenses.edit', ['expense' => $expense]);
+        return view('expenses.edit', ['expense' => $expense, 'expense_types' => auth()->user()->expenseTypes]);
     }
 
     // Update expense data
@@ -73,9 +75,7 @@ class ExpenseController extends Controller
         ]);
 
         $formData['description'] = $request->input('description');
-
-        $formData['type'] = $request->input('type');
-
+        $formData['expense_type_id'] = $request->input('expense_type_id');
         $formData['updated_at'] = now();
 
         $expense->update($formData);

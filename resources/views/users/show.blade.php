@@ -4,19 +4,16 @@
     <div class="container px-5">
         <div class="card bg-light px-3 shadow-sm">
             <div class="card-body">
+
                 <div class="d-flex justify-content-between align-items-center my-2">
-                    <h2>{{ $expense['name'] }}</h2>
+                    <h2>Profile</h2>
                     <div>
-                        <a href="/expenses/{{ $expense['id'] }}/edit" class="btn btn-warning card-link mx-1"
-                            style="width: 75px;">
+                        <a href="#" class="btn btn-warning card-link mx-1" style="width: 75px;">
                             Edit
                         </a>
-                        <button type="button" class="btn btn-danger card-link mx-1" data-bs-toggle="modal"
-                            data-bs-target="#deleteModal{{ $expense['id'] }}" style="width: 75px;">
+                        <button type="button" class="btn btn-danger card-link mx-1" style="width: 75px;">
                             Delete
                         </button>
-                        <x-delete-modal :expense="$expense" />
-
                     </div>
                 </div>
 
@@ -31,37 +28,29 @@
                     <tbody>
                         <tr>
                             <td>
-                                Amount
+                                Name
                             </td>
                             <td>
-                                Rs.{{ $expense['amount'] }}/-
+                                {{ $user->name }}
                             </td>
                         </tr>
 
                         <tr>
                             <td>
-                                Type
+                                Email
                             </td>
                             <td>
-                                {{ $expense['expense_type']['type'] }}
+                                {{ $user->email }}
                             </td>
                         </tr>
 
-                        <tr>
-                            <td>
-                                Description
-                            </td>
-                            <td>
-                                {{ $expense['description'] }}
-                            </td>
-                        </tr>
 
                         <tr>
                             <td>
                                 Created at
                             </td>
                             <td>
-                                {{ $expense['created_at'] }}
+                                {{ $user->created_at->toDateTimeString() }}
                             </td>
                         </tr>
 
@@ -70,7 +59,7 @@
                                 Updated at
                             </td>
                             <td>
-                                {{ $expense['updated_at'] }}
+                                {{ $user->updated_at->toDateTimeString() }}
                             </td>
                         </tr>
                     </tbody>

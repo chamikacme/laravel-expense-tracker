@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\ExpenseType;
 use Illuminate\Http\Request;
 use Illuminate\Foundation\Auth\User;
 use Illuminate\Support\Facades\Redirect;
@@ -49,6 +50,26 @@ class UserController extends Controller
         // Sign the user in
         auth()->login($user);
 
+        $expense_types = [
+            'Uncategorized',
+            'Transport',
+            'Food',
+            'Housing',
+            'Clothing',
+            'Healthcare',
+            'Croceries',
+            'Education',
+            'Entertainment',
+            'Personal'
+        ];
+
+        foreach ($expense_types as $expense_type) {
+            $type = new ExpenseType();
+            $type->type = $expense_type;
+            $type->user_id = $user->id;
+            $type->save();
+        }
+
         // Redirect to home page
         return redirect()->intended();
     }
@@ -88,5 +109,12 @@ class UserController extends Controller
         return back()->withErrors([
             'email' => 'Invalid credentials',
         ]);
+    }
+
+    // Show Profile
+    public function show()
+    {
+        $user = auth()->user();
+        return view('users.show', compact('user'));
     }
 }
