@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ChartController;
 use App\Models\Expense;
 use Illuminate\Support\Facades\Route;
 
@@ -83,3 +84,7 @@ Route::put('/profile/update', [UserController::class, 'update'])->middleware('au
 
 // delete profile
 Route::delete('/profile', [UserController::class, 'destroy'])->middleware('auth');
+
+
+// show chart
+Route::get('/charts/expense', [ChartController::class, 'expenseChart'])->middleware('auth');

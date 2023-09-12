@@ -10,11 +10,27 @@ use Illuminate\Support\Facades\Redirect;
 class UserController extends Controller
 {
 
-    // Show register form
+    // Show home page
     public function home()
     {
-        Redirect::setIntendedUrl(url()->previous());
-        return view('users.home');
+        if (auth()->user() !== null) {
+            $expenseTypeTotal = ExpenseType::selectRaw('expense_types.type, sum(expenses.amount) as total')
+                ->leftJoin('expenses', 'expenses.expense_type_id', '=', 'expense_types.id')
+                ->where('expense_types.user_id', auth()->user()->id)
+                ->groupBy('expense_types.type')
+                ->pluck('total', 'expense_types.type');
+
+            $expenseTypeTotal->transform(function ($item, $key) {
+                if ($item == null) {
+                    $item = 0;
+                }
+                return $item;
+            });
+
+            return view('users.home', compact('expenseTypeTotal'));
+        }
+        $expenseTypeTotal = null;
+        return view('users.home', compact('expenseTypeTotal'));
     }
 
     // Show register form

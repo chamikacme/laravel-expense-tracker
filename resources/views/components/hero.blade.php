@@ -3,9 +3,6 @@
     <div class="card bg-light p-5 my-3 shadow-sm  text-center">
         @auth
             <h1>Hello {{ Auth::user()->name }}! </h1>
-            <br>
-            <p>Go to your expenses</p>
-            <a class="btn btn-primary" href="/expenses">Expenses</a>
         @else
             <h1>Hello,</h1>
             <h2>Do wanna save money?</h2>
