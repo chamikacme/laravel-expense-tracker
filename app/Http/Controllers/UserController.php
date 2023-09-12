@@ -57,7 +57,7 @@ class UserController extends Controller
             'Housing',
             'Clothing',
             'Healthcare',
-            'Croceries',
+            'Groceries',
             'Education',
             'Entertainment',
             'Personal'
@@ -116,5 +116,40 @@ class UserController extends Controller
     {
         $user = auth()->user();
         return view('users.show', compact('user'));
+    }
+
+    // Show Edit Profile
+    public function edit()
+    {
+        $user = auth()->user();
+        return view('users.edit', compact('user'));
+    }
+
+    // Update Profile
+    public function update(Request $request)
+    {
+        $formData = $request->validate([
+            'name' => 'required|min:3',
+            'email' => 'required|email|unique:users,email,' . auth()->user()->id,
+        ]);
+
+        $user = User::find(auth()->user()->id);
+
+        $user->name = $request->name;
+        $user->email = $request->email;
+
+        $user->updated_at = now();
+
+        $user->update();
+
+        return redirect('/profile');
+    }
+
+    //Delete account
+    public function destroy()
+    {
+        $user = User::find(auth()->user()->id);
+        $user->delete();
+        return redirect('/');
     }
 }

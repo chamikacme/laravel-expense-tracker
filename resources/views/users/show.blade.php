@@ -8,12 +8,15 @@
                 <div class="d-flex justify-content-between align-items-center my-2">
                     <h2>Profile</h2>
                     <div>
-                        <a href="#" class="btn btn-warning card-link mx-1" style="width: 75px;">
+                        <a href="/profile/edit" class="btn btn-warning card-link mx-1" style="width: 75px;">
                             Edit
                         </a>
-                        <button type="button" class="btn btn-danger card-link mx-1" style="width: 75px;">
+
+                        <button type="button" class="btn btn-danger card-link m-1" data-bs-toggle="modal"
+                            data-bs-target="#deleteProfileModal" style="width: 75px;">
                             Delete
                         </button>
+                        <x-delete-profile-modal />
                     </div>
                 </div>
 

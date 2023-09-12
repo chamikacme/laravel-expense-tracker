@@ -47,10 +47,10 @@ Route::post('/expenses', [ExpenseController::class, 'store'])->middleware('auth'
 Route::get('/expenses/{expense}/edit', [ExpenseController::class, 'edit'])->middleware('auth');
 
 // update listing
-Route::put('expenses/{expense}', [ExpenseController::class, 'update'])->middleware('auth');
+Route::put('/expenses/{expense}', [ExpenseController::class, 'update'])->middleware('auth');
 
 // delete listing
-Route::delete('expenses/{expense}', [ExpenseController::class, 'destroy'])->middleware('auth');
+Route::delete('/expenses/{expense}', [ExpenseController::class, 'destroy'])->middleware('auth');
 
 // single expense
 Route::get('/expenses/{expense}', [ExpenseController::class, 'show'])->middleware('auth');
@@ -74,3 +74,12 @@ Route::post('/users/authenticate', [UserController::class, 'authenticate'])->mid
 
 // show user profile
 Route::get('/profile', [UserController::class, 'show'])->middleware('auth');
+
+// show edit form
+Route::get('/profile/edit', [UserController::class, 'edit'])->middleware('auth');
+
+// update profile
+Route::put('/profile/update', [UserController::class, 'update'])->middleware('auth');
+
+// delete profile
+Route::delete('/profile', [UserController::class, 'destroy'])->middleware('auth');

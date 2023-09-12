@@ -17,9 +17,6 @@ class ExpenseTypeController extends Controller
     }
 
 
-    public function create(Request $request)
-    {
-    }
 
     //Store expense type
     public function store(Request $request)
@@ -41,21 +38,6 @@ class ExpenseTypeController extends Controller
         return redirect('expenses/types');
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
 
     //Update expense type
     public function update(Request $request, ExpenseType $expenseType)
@@ -72,9 +54,7 @@ class ExpenseTypeController extends Controller
         return redirect('expenses/types');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
+    //Delete expense type
     public function destroy(ExpenseType $expenseType)
     {
         if ($expenseType->user_id !== auth()->user()->id) {
