@@ -1,6 +1,6 @@
 @props(['expenseTypeTotal'])
 
-<div>
+<div class="w-75">
     <div>
 
         <canvas id="expense-chart"></canvas>
@@ -9,18 +9,9 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
     <script>
-        var expenseData = <?php echo json_encode($expenseTypeTotal); ?>;
-
-        var expense_labels = [];
-        var expense_values = [];
-
-        var expenseDataObject = JSON.parse(JSON.stringify(expenseData));
-
-        for (var key in expenseDataObject) {
-            console.log(key);
-            expense_labels.push(key);
-            expense_values.push(expenseDataObject[key]);
-        }
+        var expenseData = @json($expenseTypeTotal);
+        var expense_labels = Object.keys(expenseData);
+        var expense_values = Object.values(expenseData);
 
         var ctx = document.getElementById("expense-chart").getContext("2d");
         var myChart = new Chart(ctx, {

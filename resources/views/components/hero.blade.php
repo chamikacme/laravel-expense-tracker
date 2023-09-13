@@ -1,6 +1,6 @@
-<div class="container px-5">
+<div class="container">
 
-    <div class="card bg-light p-5 my-3 shadow-sm  text-center">
+    <div class="card bg-light shadow-sm  text-center">
         @auth
             <h1>Hello {{ Auth::user()->name }}! </h1>
         @else
