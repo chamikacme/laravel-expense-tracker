@@ -3,6 +3,9 @@
 @section('content')
     @auth
 
+        <?php
+        $total = array_sum($expenseTypeTotal->toArray());
+        ?>
 
         <div class="container">
 
@@ -22,7 +25,11 @@
                             </div>
                             <div class="card-body">
                                 <div class="col d-flex justify-content-center">
-                                    <x-expenses-chart :expenseTypeTotal="$expenseTypeTotal" />
+                                    @if (count($expenseTypeTotal) > 0)
+                                        <x-expenses-chart :expenseTypeTotal="$expenseTypeTotal" />
+                                    @else
+                                        <p class="m-3">No expenses availabe</p><br>
+                                    @endif
                                 </div>
                             </div>
                         </div>
@@ -35,11 +42,11 @@
                                         <h4 class="m-0">Total Expenses</h4>
                                     </div>
                                     <div class="card-body d-flex align-items-center justify-content-center py-0">
-                                        <p class="fs-2 m-0 fw-semibold">Rs.11500/-</p>
+                                        <p class="fs-2 m-0 fw-semibold">Rs.{{ $total }}/-</p>
                                     </div>
 
                                     <div class="card-footer">
-                                        <p class="m-0">for 13 days </p>
+                                        <p class="m-0">for {{ date('j') }} days </p>
                                     </div>
 
                                 </div>
@@ -50,7 +57,8 @@
                                         <h4 class="m-0">Monthly Quota</h4>
                                     </div>
                                     <div class="card-body py-0">
-                                        <p class="fs-2 m-0 fw-semibold">35% used</p>
+                                        <p class="fs-2 m-0 fw-semibold">
+                                            {{ $total > 0 ? floor(($total / 25000) * 100) : 0 }}% used</p>
                                     </div>
 
                                     <div class="card-footer">
@@ -63,39 +71,58 @@
                             <div class="col-4 p-1">
                                 <div class="card bg-light shadow-sm h-100 text-center">
                                     <div class="card-header">
-                                        <h5 class="m-0">Education</h5>
+                                        <h5 class="m-0">
+                                            #1 {{ $expenseTypeTotal->first() ? $expenseTypeTotal->keys()->first() : '-' }}
+                                        </h5>
                                     </div>
                                     <div class="card-body py-0">
-                                        <p class="fs-4 m-0 fw-semibold">Rs.2500/-</p>
+                                        <p class="fs-4 m-0 fw-semibold">
+                                            Rs.{{ $expenseTypeTotal->first() ? $expenseTypeTotal->first() : '0' }}/-</p>
                                     </div>
                                     <div class="card-footer">
-                                        <p class="m-0">45% of Total</p>
+                                        <p class="m-0">
+                                            {{ $expenseTypeTotal->first() ? floor(($expenseTypeTotal->first() / $total) * 100) : '0' }}%
+                                            of Total</p>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-4 p-1">
                                 <div class="card bg-light shadow-sm h-100 text-center">
                                     <div class="card-header">
-                                        <h5 class="m-0">Entertainment</h5>
+                                        <h5 class="m-0">
+                                            #2
+                                            {{ $expenseTypeTotal->first()? $expenseTypeTotal->keys()->skip(1)->first(): '-' }}
+                                        </h5>
                                     </div>
                                     <div class="card-body py-0">
-                                        <p class="fs-4 m-0 fw-semibold">Rs.1600/-</p>
+                                        <p class="fs-4 m-0 fw-semibold">
+                                            Rs.{{ $expenseTypeTotal->first() ? $expenseTypeTotal->skip(1)->first() : '0' }}/-
+                                        </p>
                                     </div>
                                     <div class="card-footer">
-                                        <p class="m-0">28% of Total</p>
+                                        <p class="m-0">
+                                            {{ $expenseTypeTotal->first() ? floor(($expenseTypeTotal->skip(1)->first() / $total) * 100) : '0' }}%
+                                            of Total</p>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-4 p-1">
                                 <div class="card bg-light shadow-sm h-100 text-center">
                                     <div class="card-header">
-                                        <h5 class="m-0">Transport</h5>
+                                        <h5 class="m-0">
+                                            #3
+                                            {{ $expenseTypeTotal->first()? $expenseTypeTotal->keys()->skip(2)->first(): '-' }}
+                                        </h5>
                                     </div>
                                     <div class="card-body py-0">
-                                        <p class="fs-4 m-0 fw-semibold">Rs.1510/-</p>
+                                        <p class="fs-4 m-0 fw-semibold">
+                                            Rs.{{ $expenseTypeTotal->first() ? $expenseTypeTotal->skip(2)->first() : '0' }}/-
+                                        </p>
                                     </div>
                                     <div class="card-footer">
-                                        <p class="m-0">25% of Total</p>
+                                        <p class="m-0">
+                                            {{ $expenseTypeTotal->first() ? floor(($expenseTypeTotal->skip(2)->first() / $total) * 100) : '0' }}%
+                                            of Total</p>
                                     </div>
                                 </div>
                             </div>
@@ -105,15 +132,26 @@
                                 <div class="card-header">
                                     <h5 class="m-0">Other Expenses List</h5>
                                 </div>
-                                <div class="card-body">
-                                    <ul class="m-0">
-                                        <li>Other Expenses</li>
-                                        <li>Other Expenses</li>
-                                        <li>Other Expenses</li>
-                                    </ul>
+                                <div class="card-body text-start">
+
+                                    <div class="d-flex flex-wrap">
+                                        @if (count($expenseTypeTotal->skip(3)) > 0)
+                                            @foreach ($expenseTypeTotal->skip(3) as $key => $value)
+                                                <div class="d-flex flex-row col-6">
+                                                    <p class="m-0 col-6">- {{ $key }}</p>
+                                                    <p class="m-0 col-6">: Rs.{{ $value }}/-</p>
+                                                </div>
+                                            @endforeach
+                                        @else
+                                            <p class="m-3">No other expenses</p><br>
+                                        @endif
+                                    </div>
                                 </div>
+
                                 <div class="card-footer">
-                                    <p class="m-0">25% of Total</p>
+                                    <p class="m-0">
+                                        {{ $expenseTypeTotal->skip(3) && $total > 0 ? floor((array_sum($expenseTypeTotal->skip(3)->toArray()) / $total) * 100) : '0' }}%
+                                        of Total</p>
                                 </div>
                             </div>
                         </div>
