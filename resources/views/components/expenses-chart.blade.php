@@ -1,8 +1,7 @@
 @props(['expenseTypeTotal'])
 
-<div class="w-75">
+<div class="w-50">
     <div>
-
         <canvas id="expense-chart"></canvas>
     </div><br>
 
@@ -27,7 +26,7 @@
             },
             options: {
                 legend: {
-                    position: "bottom"
+                    position: "bottom" // Position the legend below the chart
                 },
                 title: {
                     display: true,
@@ -38,7 +37,6 @@
                     animateRotate: true
                 }
             }
-
         });
     </script>
 </div>
