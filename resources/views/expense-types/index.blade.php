@@ -2,7 +2,7 @@
 
 @section('content')
 
-    <div class="container px-5">
+    <div class="container px-5 mt-2">
         <div class="card bg-light px-3 shadow-sm">
             <div class="card-body">
                 <div class="d-flex justify-content-between align-items-center my-2">

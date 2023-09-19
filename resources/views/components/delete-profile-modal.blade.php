@@ -10,7 +10,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                Deleting your account will remove all the expenses data and this action will be non-reverseble. <br><br>
+                Deleting your account will remove all the expenses data and this action will be non-reversible. <br><br>
                 Do you still want to delete your account?</div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>

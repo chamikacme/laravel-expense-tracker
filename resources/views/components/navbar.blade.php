@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg bg-body-tertiary border-bottom px-5 mb-2 shadow-sm">
+<nav class="navbar navbar-expand-lg bg-body-tertiary border-bottom px-5 mb-0 shadow-sm z-3">
     <div class="container-fluid px-5">
         <a class="navbar-brand ms-5" href="/">Expense<span class="fw-bold">Tracker</span></a>
         <button class="navbar-toggler me-5" type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggler"

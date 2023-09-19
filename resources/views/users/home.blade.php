@@ -9,10 +9,10 @@
 
         <div class="container">
 
-            <div class="px-3">
+            <div class="px-3 mt-2">
 
                 <div class="d-flex flex-row align-items-stretch px-1 pb-1 pt-0">
-                    <div class="card bg-light shadow-sm p-4 text-center w-100">
+                    <div class="card bg-light shadow-sm p-4 w-100 text-center">
                         <h1>Hello {{ Auth::user()->name }}! </h1>
                         <h4>Expenses Dashboard</h4>
                     </div>
@@ -96,7 +96,7 @@
                                     </div>
                                     <div class="card-body py-0">
                                         <p class="fs-4 m-0 fw-semibold">
-                                            Rs.{{ $expenseTypeTotal->first() ? $expenseTypeTotal->skip(1)->first() : '0' }}/-
+                                            Rs.{{ $expenseTypeTotal->skip(1)->first() ? $expenseTypeTotal->skip(1)->first() : '0' }}/-
                                         </p>
                                     </div>
                                     <div class="card-footer">
@@ -116,7 +116,7 @@
                                     </div>
                                     <div class="card-body py-0">
                                         <p class="fs-4 m-0 fw-semibold">
-                                            Rs.{{ $expenseTypeTotal->first() ? $expenseTypeTotal->skip(2)->first() : '0' }}/-
+                                            Rs.{{ $expenseTypeTotal->skip(2)->first() ? $expenseTypeTotal->skip(2)->first() : '0' }}/-
                                         </p>
                                     </div>
                                     <div class="card-footer">
@@ -162,6 +162,22 @@
             </div>
         </div>
     @else
-        <h1>Login</h1>
+        <div class="bg-primary py-5 h-50 w-100 position-absolute top-0">
+        </div>
+        <div class="h-50 w-100 position-absolute top-50 start-0 bg-repeat opacity-25"></div>
+
+        <div class="card bg-light shadow-md w-50 position-absolute top-50 start-50 translate-middle p-5 text-start">
+
+            <h1 class="display-2 fw-medium"><span class="fw-bolder text-primary">Manage</span> Your<br>Expenses
+                <span class="fw-bolder text-primary">Easily!</span>
+            </h1>
+            <p class="fs-2 mt-3">The <span class="bg-primary text-light rounded py-1 px-2">smartest</span> way to track your
+                spending!</p>
+
+            <p class="text-center fs-4 mt-4">Register now and save money</p>
+            <a href="/register" class="btn btn-primary">Register</a>
+            <p class="text-center mt-3">Already have an account? <a href="/login">Login</a></p>
+
+        </div>
     @endauth
 @endsection

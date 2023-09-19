@@ -21,15 +21,7 @@ class UserController extends Controller
                 ->groupBy('expense_types.type')
                 ->pluck('total', 'expense_types.type');
 
-            #get top decending ordered expense types list
             $expenseTypeTotal = $expenseTypeTotal->sortDesc();
-
-            #get rest of the expenses from list
-            $restExpenses = $expenseTypeTotal->skip(3);
-
-            #check if $expenseTypeTotal is exists and iterate over it
-
-
 
             return view('users.home', compact('expenseTypeTotal'));
         }
